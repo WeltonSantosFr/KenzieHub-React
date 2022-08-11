@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import ArrowSelect from "../SelectArrow";
 import { MainRegister } from "./styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContexts";
 
 const FormRegister = () => {
+  const { handleRegister, user } = useContext(UserContext);
   let navigate = useNavigate();
 
   const scheema = yup.object().shape({
@@ -48,40 +49,11 @@ const FormRegister = () => {
     handleRegister(data);
   };
 
-  function handleRegister(data) {
-    axios
-      .post("https://kenziehub.herokuapp.com/users", data)
-      .then((res) => {
-        if (res) {
-          toast.success("Sucesso", {
-            className: "success-toast",
-            draggable: true,
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            progress: undefined,
-          });
-
-          navigate("/login");
-        }
-      })
-      .catch((err) => {
-        if (err) {
-          toast.error(err.response.data.message, {
-            className: "error-toast",
-            draggable: true,
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            progress: undefined,
-          });
-        }
-      });
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
 
   return (
     <MainRegister>
@@ -148,12 +120,24 @@ const FormRegister = () => {
             }
           >
             <option value="">Selecione um Módulo</option>
-            <option value="1o modulo">Primeiro Módulo</option>
-            <option value="2o modulo">Segundo Módulo</option>
-            <option value="3o modulo">Terceiro Módulo</option>
-            <option value="4o modulo">Quarto Módulo</option>
-            <option value="5o modulo">Quinto Módulo</option>
-            <option value="6o modulo">Sexto Módulo</option>
+            <option value="Primeiro Módulo (Introdução ao Front-end)">
+              Primeiro Módulo
+            </option>
+            <option value="Segundo Módulo (Front-end Intermediario)">
+              Segundo Módulo
+            </option>
+            <option value="Terceiro Módulo (Front-end Avançado)">
+              Terceiro Módulo
+            </option>
+            <option value="Quarto Módulo (Introdução ao Back-end)">
+              Quarto Módulo
+            </option>
+            <option value="Quinto Módulo (Back-end Intermediario)">
+              Quinto Módulo
+            </option>
+            <option value="Sexto Módulo (Back-end Avançado)">
+              Sexto Módulo
+            </option>
           </select>
           <ArrowSelect />
         </div>
