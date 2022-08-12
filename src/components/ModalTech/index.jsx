@@ -27,7 +27,6 @@ const ModalTech = ({ techs, setTechs }) => {
   });
 
   const onSubmitFunction = (data) => {
-    console.log(data);
     createTech(data);
   };
 
@@ -40,7 +39,6 @@ const ModalTech = ({ techs, setTechs }) => {
       })
       .then((res) => {
         if (res) {
-          console.log(techs);
           setTechs([...techs, res.data]);
           toast.success("Tecnologia Adicionada!", {
             className: "success-toast",

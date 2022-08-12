@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import PlusSignIcon from "../PlusSignIcon";
 import { HomeMainStyled } from "./styles";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { TechContext } from "../../contexts/TechContexts";
 
 const HomeMain = ({ techs, setTechs }) => {
   const userId = window.localStorage.getItem("userId");
+  const { setAtual } = useContext(TechContext);
 
   useEffect(() => {
     axios
@@ -34,6 +36,10 @@ const HomeMain = ({ techs, setTechs }) => {
     navigate("tech");
   }
 
+  function openModalEdit() {
+    navigate("techEdit");
+  }
+
   let navigate = useNavigate();
 
   const [token] = useState(window.localStorage.getItem("userToken"));
@@ -45,7 +51,7 @@ const HomeMain = ({ techs, setTechs }) => {
   return (
     <HomeMainStyled>
       <ToastContainer />
-      <Outlet techs={techs} setTechs={setTechs} />
+      <Outlet />
       <div className="main">
         <div className="header--main">
           <h3>Tecnologias</h3>
@@ -55,8 +61,14 @@ const HomeMain = ({ techs, setTechs }) => {
         </div>
         <div className="main--list">
           <ul>
-            {techs?.map((tech, index) => (
-              <li key={index}>
+            {techs?.map((tech) => (
+              <li
+                key={tech.id}
+                onClick={() => {
+                  setAtual(tech.id);
+                  openModalEdit();
+                }}
+              >
                 <h3>{tech.title}</h3>
                 <p>{tech.status}</p>
               </li>

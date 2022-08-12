@@ -23,7 +23,6 @@ const UserProvider = ({ children }) => {
             pauseOnHover: false,
             progress: undefined,
           });
-          console.log(res);
 
           window.localStorage.clear();
           window.localStorage.setItem("userToken", res.data.token);

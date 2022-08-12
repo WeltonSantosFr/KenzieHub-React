@@ -4,7 +4,7 @@ import { UserHeaderStyled } from "./styles";
 
 const UserHeader = () => {
   const { user } = useContext(UserContext);
-  console.log(user);
+
   return (
     <UserHeaderStyled>
       <h2>Olá, {user.name}</h2>

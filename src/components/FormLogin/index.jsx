@@ -32,7 +32,7 @@ const FormLogin = () => {
     if (user) {
       navigate("/home");
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <MainLogin>

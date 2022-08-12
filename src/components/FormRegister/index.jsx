@@ -53,7 +53,7 @@ const FormRegister = () => {
     if (user) {
       navigate("/home");
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <MainRegister>

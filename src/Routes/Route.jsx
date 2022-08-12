@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import ModalTech from "../components/ModalTech";
+import ModalTechEdit from "../components/ModalTechEdit";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -23,6 +24,12 @@ const RouteMain = () => {
               setTechs={setTechs}
               path="tech"
               element={<ModalTech techs={techs} setTechs={setTechs} />}
+            />
+            <Route
+              techs={techs}
+              setTechs={setTechs}
+              path="techEdit"
+              element={<ModalTechEdit techs={techs} setTechs={setTechs} />}
             />
           </Route>
           <Route path="login" element={<LoginPage />} />
