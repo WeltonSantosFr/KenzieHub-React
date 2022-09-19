@@ -51,6 +51,7 @@ export const MainLogin = styled.main`
       border: none;
       border-radius: 5px;
       outline: none;
+      color: var(--color-grey0);
 
       ::placeholder {
         color: var(--color-grey1);

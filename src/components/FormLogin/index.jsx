@@ -56,6 +56,7 @@ const FormLogin = () => {
           type="email"
           placeholder="Digite aqui seu email"
           {...register("email")}
+          autoComplete="off"
         />
         {<p>{errors.email?.message}</p>}
         <label htmlFor="password">Senha</label>
@@ -63,6 +64,7 @@ const FormLogin = () => {
           type="password"
           placeholder="Digite aqui sua senha"
           {...register("password")}
+          autoComplete="off"
         />
         {<p>{errors.password?.message}</p>}
         <button>Enviar</button>
